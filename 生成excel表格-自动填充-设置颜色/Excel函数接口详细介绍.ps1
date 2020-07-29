@@ -90,6 +90,10 @@ function createExcel(){
     #关闭excel
     $workbook.application.quit();
 
+    #释放进程
+    $excel = $null;
+    [GC]::Collect();
+
 }
 
 #获取进程的数据
