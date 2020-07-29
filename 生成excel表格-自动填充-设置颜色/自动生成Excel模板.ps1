@@ -5,7 +5,7 @@ $excel.DisplayAlerts = $false;
 $workbook = $excel.Workbooks.add()
 $sheet = $workbook.worksheets.Item(1)
 #$workbook.Worksheets.item(3).delete()
-$workbook.Worksheets.item(2).delete()
+#$workbook.Worksheets.item(2).delete()
 $workbook.Worksheets.item(1).name="Processes"
 $sheet = $workbook.WorkSheets.Item("Processes")
 $x = 2
@@ -57,5 +57,8 @@ for ($i=0;$i -lt $ma.count();$i++) {
    write-host "merge aera for A2= " $sheet.cells.item(2+$i,2).text -ForegroundColor yellow
 }
 
-$workbook.saveas("D:\code data\Powershell\生成excel表格-自动填充-设置颜色\测试.xlsx");
+$currentDir = Split-Path -Parent $MyInvocation.MyCommand.Definition;
+
+
+$workbook.saveas("$currentDir\测试.xlsx");
 $workbook.application.quit();

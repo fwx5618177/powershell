@@ -10,7 +10,6 @@ $ppt.displayalerts = [Microsoft.Office.Core.MsoTriState]::msoCTrue;
 $slip = $ppt.Presentations.Add();
 
 #增加内容
-$ppt.presentation.close();
 $slip.Application.quit();
 
 $ppt = $null;
