@@ -1,6 +1,7 @@
-﻿   $IEObjs = @()
+﻿
+   $IEObjs = @()
    $ShellWindows = (New-Object -ComObject Shell.Application).Windows()
-   $360chromes = (Get-Process -Name 360chrome);
+   $360chromes = (Get-Process -Name 360chrome).MainWindowTitle;
 
    #foreach($chrome in $360chromes){
     #$element = [System.Windows.Automation.AutomationProperties]::NameProperty;

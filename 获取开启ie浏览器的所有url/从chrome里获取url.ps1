@@ -23,10 +23,12 @@ Add-Type -TypeDefinition $source -ReferencedAssemblies("UIAutomationClient", "UI
 $chromes = Get-Process -name 360chrome
 foreach ($chrome in $chromes) {
   foreach ($elChromeMain in [UIAutomationHelper.Element]::FromProcess($chrome)) {
-
+    Write-Host $elChromeMain -BackgroundColor Cyan;
     $cond = New-Object -TypeName System.Windows.Automation.PropertyCondition(
-      [System.Windows.Automation.AutomationElement]::NameProperty, "Google Chrome");
+      [System.Windows.Automation.AutomationElement]::NameProperty, "");
+    Write-Host $cond -BackgroundColor Cyan;   
     $elChromeSub = $elChromeMain.FindFirst([System.Windows.Automation.TreeScope]::Children, $cond);
+    Write-Host "el:" $elChromeSub -BackgroundColor Cyan;
 
     $cond = New-Object -TypeName System.Windows.Automation.PropertyCondition(
       [System.Windows.Automation.AutomationElement]::NameProperty, "Address and search bar");
