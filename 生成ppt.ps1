@@ -7,13 +7,13 @@ $ppt.Visible = [Microsoft.Office.Core.MsoTriState]::msoCTrue;
 $ppt.displayalerts = [Microsoft.Office.Core.MsoTriState]::msoCTrue;
 
 #打开ppt
-$PPTDocument = $ppt.Presentations.open("D:\code data\Powershell\pptgenerator\local\test.pptx");
+#$PPTDocument = $ppt.Presentations.open("D:\code data\Powershell\test.pptx");
 
 #获取选定页（第一页）
-$PPTSlideLayout = $PPTDocument.Slides(1).Layout
+#$PPTSlideLayout = $PPTDocument.Slides(1).Layout
 
 #指定版式
-$PPTSlideLayout = [microsoft.office.interop.powerpoint.ppSlideLayout]::ppLayoutTitle;
+#$PPTSlideLayout = [microsoft.office.interop.powerpoint.ppSlideLayout]::ppLayoutTitle;
 
 #添加slip
 $slip = $ppt.Presentations.Add();
@@ -26,31 +26,32 @@ $TextAnimationEffects = 257, 258, 513, 769, 770, 1025, 1026, 1281, 1282, 1283, 1
 #从效果中选择随机动画效果
 $RandomAnimation = ($SlideAnimationEffects | Get-Random);
 #设置效果
-$slip.SlideShowTransition.EntryEffect = $RandomAnimation;
+#$slip.SlideShowTransition.EntryEffect = $RandomAnimation;
+#$PPTDocument.slides(1).SlideShowTransition.EntryEffect = $RandomAnimation;
+$slip.Slides(1).SlideShowTransition.EntryEffect = $RandomAnimation;
+
+#$slip.ApplyTemplate("C:\Program Files\Microsoft Office\root\Templates\2052\ClassicPhotoAlbum.potx");
 
 #标题
-        $slide.Shapes.Title.TextFrame.TextRange.Text = $TitleText
-        $slide.Shapes.Title.AnimationSettings.TextLevelEffect = 1
-        $RandomAnimation = ($TextAnimationEffects | Get-Random)
-        $slide.Shapes.Title.AnimationSettings.EntryEffect = $RandomAnimation
-        $slide.Shapes.Title.AnimationSettings.AdvanceMode = 2
-        $slide.Shapes.Title.AnimationSettings.Animate = $msoTrue
-                $slide.Shapes.Item(2).TextFrame2.Column.Number = 3 # This is where you might wish to change the number of the item if you have the text field on a different index
-        $slide.Shapes.Item(2).TextFrame.TextRange.Text = $SlideText # This is where you might wish to change the number of the item if you have the text field on a different index
-        $slide.Shapes.Item(2).AnimationSettings.TextLevelEffect = 1
-        $RandomAnimation = ($TextAnimationEffects | Get-Random)
-        $slide.Shapes.Item(2).AnimationSettings.EntryEffect = $RandomAnimation
-        $slide.Shapes.Item(2).AnimationSettings.AdvanceMode = 2
-        $slide.Shapes.Item(2).AnimationSettings.Animate = $msoTrue
+$PPTDocument.Shapes.Title.TextFrame.TextRange.Text = "Test";
+$PPTDocument.Shapes.Title.AnimationSettings.TextLevelEffect = 1
+$RandomAnimation = ($TextAnimationEffects | Get-Random)
+$PPTDocument.Shapes.Title.AnimationSettings.EntryEffect = $RandomAnimation
+$PPTDocument.Shapes.Title.AnimationSettings.AdvanceMode = 2
+$PPTDocument.Shapes.Title.AnimationSettings.Animate = $msoTrue
+$PPTDocument.Shapes.Item(1).TextFrame2.Column.Number = 3 # This is where you might wish to change the number of the item if you have the text field on a different index
+$PPTDocument.Shapes.Item(1).TextFrame.TextRange.Text = $SlideText # This is where you might wish to change the number of the item if you have the text field on a different index
+$PPTDocument.Shapes.Item(1).AnimationSettings.TextLevelEffect = 1
+$RandomAnimation = ($TextAnimationEffects | Get-Random)
+$PPTDocument.Shapes.Item(1).AnimationSettings.EntryEffect = $RandomAnimation
+$PPTDocument.Shapes.Item(1).AnimationSettings.AdvanceMode = 2
+$PPTDocument.Shapes.Item(1).AnimationSettings.Animate = $msoTrue
 
 #添加图片
 $pic = $slide.Shapes.AddPicture(($RandomPicture.FilePath),$msoFalse, $msoTrue,$PicturesLeft,$PicturesTop, $RandomPicture.Width, $RandomPicture.Height)
 
-
-
-
 #另存为
-$slip.SaveAs("D:\code data\Powershell\pptgenerator\local\模板生成.pptx");
+$slip.SaveAs("D:\code data\Powershell\模板生成.pptx");
 
 #退出
 $slip.Application.quit();
